@@ -38,34 +38,46 @@ another or one user's preferences from another
 * with a session
 
 9. When do you want to namespace a resource? When do you want to nest a resource? What's the differences between those two approaches?
+* namespace a resource:
+classes have no relationship. It is also a way to isolate a feature, for example to an admin. Also, when a resource will never be its own entity (resource) in the application.
 
+* nest a resource:
+classes are related to each other.
 
 10. At a high level, what tools can you use to implement authorization? How would you use them?
-11. What's an enum, and what advantages does it offer? What data type needs to be in your database to use an enum? Where do you declare an enum?
-12. What are some strategies you can use to keep your views DRY?
+* enums! For example, set default user to 0 and admin to 1. Also, setting up sessions.
 
+11. What's an enum, and what advantages does it offer? What data type needs to be in your database to use an enum? Where do you declare an enum?
+* Enums are used to represent attributes that can only have a few different values that rarely change, like admin versus default user.
+* Advantage is not having to create a relationship and extra tables when it could just be an attribute.
+* You will need an integer data type in the database for the enum.
+* You declare an enum in the model for the class it concerns
+
+12. What are some strategies you can use to keep your views DRY?
+* You can reference partials for repeated view code.
 
 ### Reviews Questions
 13. Given the following array of hashes, how would I print an alphabetical list of holidays?
 ```ruby
+holidays =
 [
  {holiday: {name: "St Patrick's Day", supplies: ["Corned Beef and Cabbage"]}},
  {holiday: {name: "Halloween", supplies: ["Candy", "Costume"]}},
  {holiday: {name: "Hanukkah", supplies: ["Menorah"]}}
 ]
+```
+```
+holidays.sort_by do |holiday|
+  holiday[:holiday][:name]
+end
 ```  
 
 14. How would you clean incoming data to ensure "$300" or "300.00" is stored as 300?
-
+`'300'.delete('$ .')`
 
 ### Self Assessment:
 Choose One:
 * I was able to answer every question without relying on outside resources
-* I was able to answer most questions independently, but utilized outside resources for a few
-* I was able to answer a few questions independently, but relied heavily on outside resources
 
 Choose One:
-* I feel confident about the content presented this week
 * I feel comfortable with the content presented this week
-* I feel overwhelmed by the content presented this week
-* I feel quite lost by the content presented this week
